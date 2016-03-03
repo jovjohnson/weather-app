@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>what's the weather?</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="stylin.css">
+</head>
+<body>
+	<div class="container">
+		
+		<div class="jumbotron">
+			What's The Weather?
+		</div>
+
+		<div class="row">
+			
+			<div class="col-sm-6" id="input">
+	
+				<div id="form">
+					<input type="text" id="city" placeholder="Enter City">
+					<button class="btn" id="submit">Get Weather</button>
+				</div>
+				<div id="recent-searches">
+					<ul id="list">
+						
+					</ul>
+				</div>
+			
+			</div>
+			<div class="col-sm-6 template" id="weather-display">
+				<!-- Weather goes here -->
+
+				<div id="forecast-table">
+					<table>
+						<tr>
+							<td colspan="3" id="outlook"></td>
+						</tr>
+						<tr id="three-day-forecast">
+							<td id="1"></td>
+							<td id="2"></td>
+							<td id="3"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- 
+			<div class="col-sm-6" id="recent">
+				List Goes Here
+			</div> -->
+		
+	</div>
+	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
