@@ -2,12 +2,33 @@ $(document).ready(init);
 
 var cities;
 
+console.log(localStorage.cities)
+
 function init () {
+
+	var n = navigator.geolocation;
+
+	n.getCurrentPosition(success, failure); 
+
+	function success(position) {
+			
+			var mylat = position.coords.latitude;
+			var mylong = position.coords.longitude;
+			$('#geocurrent').html(mylat);
+			$('#geocurrent1').html(mylong);
+ 		}	
+
+ 	function failure() {
+
+ 		$('#geocity').html("your location cannot be retrieved");
+ 	}
+	
 
 	loadFromLocalStorage();
 
 	$("#submit").click(clickTemp);
 
+	$('thead').hide();
 }
 
 function loadFromLocalStorage() {
@@ -15,7 +36,6 @@ function loadFromLocalStorage() {
 	if(localStorage.cities === undefined) {
 		localStorage.cities = '[]';
 	}
-
 	cities = JSON.parse(localStorage.cities);
 }
 
@@ -30,6 +50,8 @@ function clickTemp() {
 	getWeather();
 
 	getForecast();
+
+	$('thead').show();
 
 	$('#city').val('');
 
@@ -52,13 +74,7 @@ function getWeather() {
 	 		name = data.name;
 	 		temperature = Math.round(data.main.temp);
 	 		humidity = data.main.humidity;
-
-	 		  // console.log(data);
-	 		   // console.log(temperature);
-	 		  // console.log(name);
-	 		  // console.log(humidity);
-
-	// 		 manipulate the DOM here
+	 		conditions = data.weather[0].main;
 			
 			 displayWeather();
 
@@ -69,14 +85,10 @@ function getWeather() {
 	 	}
 	
 	 });
-
-	
 	 saveToLocalStorage();
 }
 
-
 function getForecast() {
-
 
 	var apiForecast = 'http://api.openweathermap.org/data/2.5/forecast/daily?q=';
 	var city = $('#city').val();
@@ -89,24 +101,18 @@ function getForecast() {
 	 	method: 'GET',
 	 	url: forecastUrl,
 	 	success: function(data) {
-	 		   console.log(data);
+	 	 	
+	 	   	console.log(data);
 	 		// name = data.name;
-	 		 var nextDayForecast = Math.round(data.list[1].temp.day);
-	 		 var twoDayForecast = Math.round(data.list[2].temp.day);
-	 		 var threeDayForecast = Math.round(data.list[3].temp.day);
-	 		 var outlook = "A look ahead";
+	 		var nextDayForecast = Math.round(data.list[1].temp.day) + "°";
+	 		var twoDayForecast = Math.round(data.list[2].temp.day) + "°";
+	 		var threeDayForecast = Math.round(data.list[3].temp.day) + "°";
+	 		var outlook = "3 DAY FORECAST";
 	// 		 manipulate the DOM here
 			$('#1').text(nextDayForecast);
 			$('#2').text(twoDayForecast);
 			$('#3').text(threeDayForecast);
-			$('#outlook').text(outlook);
-
-			
-
-			
-
-			
-			  
+			$('#outlook').text(outlook); 
 
 	 	},
 
@@ -116,35 +122,37 @@ function getForecast() {
 	
 	 });
 
-
-
-	 // console.log(forecastUrl);
-
 }
 
+function displayWeather() {   //display city name, icon, temperature, humidity
 
-function displayWeather() {
 
-//display city name, icon, temperature, humidity
 	var $name = $('<h2>' + name + '</h2>');
 	$('#weather-display').append($name);
 
-	var $temp = $('<p>' + temperature+ '°' + '</p>');
+	var $icon = $('<div>');
+	$('#weather-display').append($icon);
+	$icon.addClass('icon');
+
+	var $temp = $('<p>' + temperature + '°' + '</p>');
 	$('#weather-display').append($temp);
 	$temp.addClass('temperature');
 
-	var $forecastButton = $('<button>' + 'Get Forecast For This City' + '</button>'); //dynamic forecast button
+	var $conditions = $('<p>' + conditions + '</p>');
+	$('#weather-display').append($conditions);
+	$conditions.addClass('conditions');
 
 }
-
-
-
 
 function saveToLocalStorage() {
 
 	localStorage.cities = JSON.stringify(cities);
 }
 
+function displayLocalWeather() {
+
+
+}
 
 
 

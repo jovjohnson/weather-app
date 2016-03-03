@@ -23,37 +23,49 @@
 					<button class="btn" id="submit">Get Weather</button>
 				</div>
 				<div id="recent-searches">
-					<ul id="list">
-						
-					</ul>
+					<table class="table table-striped">
+  						<tr>
+  							<td id="rs-head">Near You:</td>
+  							<td id="geocity">Fremont, CA</td>
+  						</tr>
+  						<tr>
+  							<td id="geocurrent"></td>
+  							<td id="geocurrent1"></td>
+  						</tr>
+  					
+  						
+					</table>
 				</div>
 			
 			</div>
 			<div class="col-sm-6 template" id="weather-display">
 				<!-- Weather goes here -->
-
-				<div id="forecast-table">
+				
 					<table>
-						<tr>
-							<td colspan="3" id="outlook"></td>
-						</tr>
+						<thead>
+							<th>Tomorrow</th>
+							<th>Next Day</th>
+							<th>Following Day</th>
+						</thead>
 						<tr id="three-day-forecast">
 							<td id="1"></td>
 							<td id="2"></td>
 							<td id="3"></td>
 						</tr>
 					</table>
-				</div>
+
+					<div id="icon"></div>
+				
 			</div>
 		</div>
-		<!-- 
-			<div class="col-sm-6" id="recent">
-				List Goes Here
-			</div> -->
 		
 	</div>
 	<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="http://maps.google.com/maps/api/js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="main.js"></script>
 </body>
 </html>
+
+
+<!-- AIzaSyA1iTK6urNb_Hysp0gXDEHj2JIaKW-La0s -->
