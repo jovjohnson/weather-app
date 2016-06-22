@@ -11,17 +11,19 @@ function init () {
 
 	function success(position) {
 
-		var mylat = position.coords.latitude;
-		var mylong = position.coords.longitude;
+		var mylat = Math.floor(position.coords.latitude);
+		var mylong = Math.floor(position.coords.longitude);
 
 		console.log(mylat, mylong);
+
+		getWeather(mylat, mylong);
+
  	}
 
  	function failure() {
  		$('#geocity').html("your location cannot be retrieved");
  	}
 
-	getWeather();
 
 
 
@@ -56,13 +58,14 @@ function clickTemp() {
 
 }
 
-function getWeather() {
+function getWeather(lat, long) {
 
-	var api = 'http://api.openweathermap.org/data/2.5/weather?q=';
-	var city = $('#city').val();
+	var api = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long;
+	console.log(api);
+	// var city = $('#city').val();
 	var apiKey = '&APPID=defcbdf0664d7daa4fd49cbb1dd3b56a';
 	var units = '&units=imperial'
-	var weatherUrl = api + city + units + apiKey;
+	var weatherUrl = api + units + apiKey;
 	console.log(weatherUrl);
 
 	 $.ajax({
